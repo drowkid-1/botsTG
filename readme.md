@@ -1,6 +1,6 @@
 # ✦ ⚡ ｂｏｔｓＴＧ ⚡ ✦
 
-# <a href='https://github.com/drowkid-1/vpsbot>ＶＰＳＢｏｔ</a>
+# <a href='https://github.com/drowkid-1/vpsbot'>ＶＰＳＢｏｔ</a>
 # ＴｅｌｅＢｏｔＧｅｎ 
 # <ＢｏｔＮｏｄｅ 
 # Ｇｅｎｅｒａｄｏｒ  ｄｅ  Ｇｅｎｅｒａｄｏｒｅｓ
