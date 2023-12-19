@@ -165,9 +165,9 @@ print_center() {
         done
         space+="$line"
         if [[ -z $2 ]]; then
-            msgi -azu "$space"
+            msg -azu "$space"
         else
-            msgi "$col" "$space"
+            msg "$col" "$space"
         fi
     done <<<$(echo -e "$text")
 }

@@ -8,9 +8,9 @@ lista="BotGen.sh botScript.sh ShellBot.sh"
 	wget -O ${dir}/$arqx ${rekuest}/$arqx &> /dev/null
 	chmod +x ${dir}/$arqx
 	done
-	wget -O ${dir}/colores https://raw.githubusercontent.com/rudi9999/Herramientas/main/module/module &> /dev/null
+	wget -O ${dir}/colores https://raw.githubusercontent.com/drowkid-1/botsTG/main/code/sources/colores &> /dev/null
 	source ${dir}/colores
-clear;msg -bar;msg -ne "token:";read token;msg -ne "id:";read idd
+clear;msg -bar;msg -ne "token:" token;msg -ne "id:" idd
 jq --arg a "${idd}" --arg b "${token}" '{token: $b, data:{ admin:{ id: $a, username: "drowkid01" } } }' -n
 msg -bar;print_center -nverd "[✓]datos guardados[✓]"
 }
