@@ -1,5 +1,4 @@
-# ✦ ⚡ ｂｏｔｓＴＧ ⚡ ✦
-# lista de bots:
+# bots:
 
 # <a href='https://github.com/drowkid-1/botsTG/tree/main/code/vpsbot'>VPSBot</a>
 # <a href='https://github.com/drowkid-1/botsTG/tree/main/code/telebotgen'>TeleBotGen</a>
