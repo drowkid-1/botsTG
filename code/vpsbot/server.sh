@@ -1,12 +1,12 @@
 #!/bin/bash
 	declare -A dir=( [0]="patoBot" [http]="downShell" [script]="downScript" [var]="var/www" [html]="var/www/html" )
 function checkdir(){ diR=$1;[[ ! -d "${diR}" ]] && mkdir -p "${diR}" &> /dev/null ; }
-	for x in $(echo "${dir[0]} ${dir[http]} ${dir[script]} ${dir[html]}"); do
+	for x in $(echo "${dir[http]} ${dir[script]} ${dir[html]}"); do
 	checkdir "$x"
 	done
 #IVAR="/etc/http-instas"
-IVAR="${dir[0]}/key-use" && [[ ! -e ${IVAR} ]] && touch ${IVAR}
-NID="${dir[0]}/Key-ID"
+IVAR="key-use" && [[ ! -e ${IVAR} ]] && touch ${IVAR}
+NID="Key-ID"
 # FUNCAO PARA DETERMINAR O IP
 remover_key_usada () {
   local DIR="${dir[http]}"
@@ -24,15 +24,9 @@ remover_key_usada () {
 }
 
 fun_ip () {
-  if [[ ! -e /etc/MEU_IP ]]; then
-    local MIP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-    local MIP2=$(wget -qO- ipv4.icanhazip.com)
-    [[ "$MIP" != "$MIP2" ]] && IP="$MIP2" || IP="$MIP"
-    echo "$IP" > /etc/MEU_IP
-    echo "$IP"
-  else
-    echo "$(cat /etc/MEU_IP)"
-  fi
+ip1=$(wget -qO- ipv4.icanhazip.com) && ip2=$(wget -qO- ifconfig.me)
+ip3=$(curl -s IP.TYK.NU -w "\n") && ip4=$(wget -qO- ipecho.net/plain)  #ip4=$(hostname -i)
+ [[ $(echo $ip1|grep -v grep|grep $ip2) != $(echo $ip3|grep -v grep|grep $ip4) ]] && ip="" || ip="$(echo $ip2|grep $ip4)"
 }
 
 # LOOP PARA EXECUCAO DO PROGRAMA
@@ -47,10 +41,8 @@ server_fun(){
   DIR="${dir[http]}" #DIRETORIO DAS KEYS ARMAZENADAS
   if [[ ! -d $DIR ]]; then mkdir $DIR; fi
     read URL
-#    KEY=$(echo $URL|cut -d' ' -f2|cut -d'/' -f2) && [[ ! $KEY ]] && KEY="ERRO" #KEY
     KEY=$(echo $URL|cut -d'-' -f2)
     KEY+=$(echo $URL|cut -d'-' -f3)
-#    ARQ=$(echo $URL|cut -d' ' -f2|cut -d'/' -f3)  && [[ ! $ARQ ]] && ARQ="ERRO" #LISTA INSTALACAO
     ARQ="lista-arq"
     USRIP=$(echo $URL|cut -d' ' -f2|cut -d'/' -f4) && [[ ! $USRIP ]] && USRIP="ERRO" #IP DO USUARIO
     REQ=$(echo $URL|cut -d' ' -f2|cut -d'/' -f5) && [[ ! $REQ ]] && REQ="ERRO"
@@ -131,7 +123,7 @@ if [[ ! -e $DIRETORIOKEY/key.fija ]]; then
 fi
 (
 mkdir ${dir[html]}/$KEY -p
-TIME="20+"
+TIME="40+"
   for arqs in `cat $FILE`; do
   mv $DIRETORIOKEY/$arqs ${dir[html]}/$KEY/$arqs
   TIME+="1+"
