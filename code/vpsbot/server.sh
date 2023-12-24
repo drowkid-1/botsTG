@@ -1,5 +1,5 @@
 #!/bin/bash
-	declare -A dir=( [0]="patoBot" [http]="patoBot/downShell" [script]="patoBot/downScript" [var]="var/www" [html]="var/www/html" )
+	declare -A dir=( [0]="patoBot" [http]="downShell" [script]="downScript" [var]="var/www" [html]="var/www/html" )
 function checkdir(){ diR=$1;[[ ! -d "${diR}" ]] && mkdir -p "${diR}" &> /dev/null ; }
 	for x in $(echo "${dir[0]} ${dir[http]} ${dir[script]} ${dir[html]}"); do
 	checkdir "$x"
@@ -37,13 +37,8 @@ fun_ip () {
 
 # LOOP PARA EXECUCAO DO PROGRAMA
 listen_fun () {
-  port=$(jq -r '.port.nc' < ${dir[0]}/conf.json)
-  if [[ "$port" != @("null"|"") ]]; then
-    local PORTA="$port"
-  else
-    local PORTA="8888"
-  fi
-  local PROGRAMA="${dir[0]}/BotGen-server.sh"
+ local PORTA="8888"
+local PROGRAMA="$(pwd)/$0"
   while true; do nc.traditional -l -p "$PORTA" -e "$PROGRAMA"; done
 }
 
